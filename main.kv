@@ -1,0 +1,81 @@
+WindowManager:
+    MainWindow:
+        id: main
+    SecondWindow:
+        id: second
+
+<MainWindow@BoxLayout>:
+    user: user
+    lastname: lastname
+    type: type
+
+    name: "main"
+    md_bg_color: app.theme_cls.bg_normal
+    orientation: 'vertical'
+    MDLabel:
+        text: "Подготовка к ВПР"
+        font_style: "H5"
+        pos_hint: {'center_x': .5,'y': 0.9}
+        adaptive_size: True
+    MDLabel:
+        text: "Авторизация ученика"
+        pos_hint: {'center_x': .5,'y': 0.8}
+        adaptive_size: True
+    BoxLayout:
+        orientation: 'vertical'
+        size_hint: .8, .15
+        pos_hint: {'center_x': 0.5, 'y': 0.4}
+        MDTextField:
+            id: user
+            multiline: False
+            mode: "rectangle"
+            hint_text: "Имя"
+        MDTextField:
+            id: lastname
+            multiline: False
+            hint_text: "Фамилия"
+            mode: "rectangle"
+        MDTextField:
+            id: type
+            multiline: False
+            mode: "rectangle"
+            hint_text: "Класс"
+            helper_text: "пример: 5а"
+            helper_text_mode: "on_error"
+    MDRaisedButton:
+        text: "Войти"
+        size_hint: .5, .1
+        pos_hint: {'center_x': .5, 'y': 0.1}
+        on_press: 
+            if root.auth(): app.root.current = "second"
+            root.manager.ids.second.ids.user_profile.text = user.text + " " + lastname.text + " " + type.text
+
+<SecondWindow@BoxLayout>:
+    name: "second"
+    orientation: "vertical"
+
+    MDScreen:
+        MDTopAppBar:
+            pos_hint: {"y": .9}
+            title: user_profile.text
+            right_action_items: [["menu", lambda x: x]]
+    
+        BoxLayout:
+            ScrollView:
+                do_scroll_y: True
+                effect_cls: "ScrollEffect"
+                pos_hint: {"center_y": .1}
+                bar_width: 0
+                MDBoxLayout:
+                    adaptive_height: True
+                    orientation: "vertical"
+                    spacing: dp(20)
+                    MDLabel:
+                        id: user_profile
+                    MDLabel:
+                        id: user_profile
+                    MDLabel:
+                        id: user_profile
+                    MDLabel:
+                        id: user_profile
+                
