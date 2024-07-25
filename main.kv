@@ -57,9 +57,11 @@ WindowManager:
     MDScreen:
         MDTopAppBar:
             pos_hint: {"y": .9}
-            title: user_profile.text
-            right_action_items: [["menu", lambda x: x]]
-    
+            right_action_items: [["menu", lambda x: app.second_window.callback(x)]]
+            BoxLayout:
+                MDLabel:
+                    id: user_profile
+                    text: user_profile.text
         BoxLayout:
             ScrollView:
                 do_scroll_y: True
@@ -71,11 +73,5 @@ WindowManager:
                     orientation: "vertical"
                     spacing: dp(20)
                     MDLabel:
-                        id: user_profile
-                    MDLabel:
-                        id: user_profile
-                    MDLabel:
-                        id: user_profile
-                    MDLabel:
-                        id: user_profile
-                
+                        text: 
+
